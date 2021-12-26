@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="file:///Users/jacob/projects/fv-generator/style.css">
+</head>
+<body class="A4">
+<section class="sheet padding-10mm" style="display: flex; flex-direction: column">
+    <div class="pre-header">
+        <div class="ph-title">
+            <p>Miejscowość:</p>
+            <p>Data:</p>
+        </div>
+        <div class="ph-content">
+            <p>Borne Sulinowo</p>
+            <p>26.12.1241</p>
+        </div>
+    </div>
+    <div class="header">
+        <p>Faktura VAT nr {{.NO}}</p>
+    </div>
+    <div class="contact">
+        <div class="c-column">
+            <p class="c-header">
+                Sprzedawca:
+            </p>
+            <div class="c-item">
+                <p>Nazwa firmy:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+            <div class="c-item">
+                <p>Adres:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+            <div class="c-item">
+                <p>NIP:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+            <div class="c-item">
+                <p>Numer konta:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+        </div>
+        <div class="c-column">
+            <p class="c-header">
+                Nabywca:
+            </p>
+            <div class="c-item">
+                <p>Nazwa firmy:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+            <div class="c-item">
+                <p>Adres:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+            <div class="c-item">
+                <p>NIP:</p>
+                <p class="c-item-content">{{.CompanyName}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="table">
+        <div class="t-row">
+            <div class="t-column">Opis</div>
+            <div class="t-column">Jednostka miary</div>
+            <div class="t-column">Ilość</div>
+            <div class="t-column">Cena za jednostkę netto</div>
+            <div class="t-column">Wartość netto</div>
+            <div class="t-column">Stawka VAT</div>
+            <div class="t-column">Kwota VAT</div>
+            <div class="t-column">Wartość brutto</div>
+        </div>
+        <div class="t-row">
+            <div class="t-column">Stała wspolpraca w zakresie uslug informatycznych</div>
+            <div class="t-column">h</div>
+            <div class="t-column">168</div>
+            <div class="t-column">70</div>
+            <div class="t-column">9600</div>
+            <div class="t-column">23%</div>
+            <div class="t-column">2100</div>
+            <div class="t-column">11500</div>
+        </div>
+        <div class="t-row t-sum">
+            <div class="t-column"></div>
+            <div class="t-column"></div>
+            <div class="t-column"></div>
+            <div class="t-column">Razem</div>
+            <div class="t-column">9600</div>
+            <div class="t-column">23%</div>
+            <div class="t-column">2100</div>
+            <div class="t-column">11500</div>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

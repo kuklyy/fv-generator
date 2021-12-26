@@ -1,0 +1,179 @@
+@page {
+    margin: 0
+}
+
+body {
+    margin: 0
+}
+
+.sheet {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always
+}
+
+body.A4 .sheet {
+    width: 210mm;
+    height: 296mm
+}
+
+.sheet.padding-10mm {
+    padding: 10mm
+}
+
+@media screen {
+    body {
+        background: #e0e0e0
+    }
+
+    .sheet {
+        background: #fff;
+        box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+        margin: 5mm auto
+    }
+}
+
+@media print {
+    body.A4 {
+        width: 210mm
+    }
+}
+
+@page {
+    size: A4
+}
+
+body {
+    font: 12px "Menlo", sans-serif;
+}
+
+.pre-header {
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+    margin-bottom: 50px;
+    width: 250px;
+}
+
+.pre-header p {
+    margin: 0;
+}
+
+.ph-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background: #A9A9A9;
+}
+
+.header p {
+    margin: 20px 0;
+}
+
+.contact {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.c-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.c-header {
+    margin: 80px 0 25px 0;
+    font-weight: 700;
+}
+
+.c-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.c-item p {
+    margin: 10px 0;
+}
+
+.c-item p:first-child {
+    width: 30%;
+    text-align: end;
+}
+
+.c-item-content {
+    width: 65%;
+}
+
+.table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    margin-top: 80px;
+}
+
+.t-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+}
+
+.t-row:first-child {
+    border: 1px solid black;
+    background: #A9A9A9;
+    font-size: 12px;
+}
+
+.t-row:nth-child(n-1) {
+    border-bottom: 1px solid black;
+}
+
+.t-row:last-child {
+    border: 0;
+    font-weight: 700;
+}
+
+.t-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.t-column:nth-child(1) {
+    width: 22%;
+}
+
+.t-column:nth-child(n+2) {
+    width: 11.5%;
+}
+
+.t-column:last-child {
+    border: 0;
+}
+
+.t-sum .t-column:nth-child(-n+3) {
+    border-color: transparent;
+}
+
+.summary {
+    font-size: 11px;
+    margin-top: 80px;
+}

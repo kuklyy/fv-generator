@@ -1,0 +1,7 @@
+.idea
+output/*.pdf
+.DS_STORE
+config.yaml
+
+bin/*
+!bin/.gitkeep

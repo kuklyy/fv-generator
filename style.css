@@ -172,3 +172,8 @@ body {
 .t-sum .t-column:nth-child(-n+3) {
     border-color: transparent;
 }
+
+.summary {
+    font-size: 11px;
+    margin-top: 80px;
+}

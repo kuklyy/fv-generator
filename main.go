@@ -4,38 +4,35 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"fv-generator/prompt"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 	"text/template"
+	"time"
 )
 
-type Context struct {
-	NO          string
-	CompanyName string
-}
-
 func main() {
+	fv := prompt.PopulateOptions()
+
 	baseTemplate, err := template.ParseFiles("template.html")
 	if err != nil {
 		log.Fatal(err)
 	}
 	var parsedTemplate bytes.Buffer
 
-	if err := baseTemplate.Execute(&parsedTemplate, Context{
-		NO:          "firsdtname",
-		CompanyName: "lastname",
-	}); err != nil {
+	if err := baseTemplate.Execute(&parsedTemplate, fv); err != nil {
 		log.Fatal(err)
 	}
 
-	if err := ioutil.WriteFile("test.html", parsedTemplate.Bytes(), 0644); err != nil {
+	if err := ioutil.WriteFile("temp.html", parsedTemplate.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
 	defer func() {
-		_ = os.Remove("test.html")
+		_ = os.Remove("temp.html")
 	}()
 
 	cwd, err := os.Getwd()
@@ -43,7 +40,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	filePath := fmt.Sprintf("file://%s/%s", cwd, "test.html")
+	filePath := fmt.Sprintf("file://%s/%s", cwd, "temp.html")
 	parsedTemplate.Reset()
 
 	taskCtx, cancel := chromedp.NewContext(
@@ -57,10 +54,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err := ioutil.WriteFile("test.pdf", parsedTemplate.Bytes(), 0644); err != nil {
+	outputName := strings.Replace(fmt.Sprintf("fv-%s.pdf", fv.NO), "/", "-", -1)
+
+	if err := ioutil.WriteFile("output/"+outputName, parsedTemplate.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Done")
+
+	fmt.Printf("File saved to output/%s at %v\n", outputName, time.Now().String())
 }
 
 func grabPdf(url string, res *bytes.Buffer) chromedp.Tasks {

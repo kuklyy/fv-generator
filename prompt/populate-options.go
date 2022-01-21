@@ -91,7 +91,7 @@ func getEntries() []Entry {
 func getEntry() Entry {
 	prompt := promptui.Prompt{
 		Label:   "Description",
-		Default: "Stała współpraca w zakresie usług informatycznych",
+		Default: "Stała współpraca w&nbsp;zakresie usług informatycznych",
 		Validate: func(s string) error {
 			if len(s) < 1 {
 				return errors.New("description is required")

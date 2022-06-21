@@ -2,11 +2,12 @@ package prompt
 
 import (
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
 	"io"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 type FV struct {
@@ -73,7 +74,7 @@ func (f FV) GetCreateAtDate() string {
 }
 
 func (f FV) GetPayday() string {
-	date := f.CreatedAt.AddDate(0, 0, 7)
+	date := f.CreatedAt.AddDate(0, 0, 14)
 	return date.Format("02.01.2006")
 }
 

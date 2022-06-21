@@ -5,14 +5,15 @@ import (
 	"context"
 	"fmt"
 	"fv-generator/prompt"
-	"github.com/chromedp/cdproto/page"
-	"github.com/chromedp/chromedp"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
 	"text/template"
 	"time"
+
+	"github.com/chromedp/cdproto/page"
+	"github.com/chromedp/chromedp"
 )
 
 func main() {

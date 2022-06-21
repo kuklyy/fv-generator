@@ -2,10 +2,11 @@ package prompt
 
 import (
 	"errors"
-	"github.com/manifoldco/promptui"
 	"log"
 	"strconv"
 	"time"
+
+	"github.com/manifoldco/promptui"
 )
 
 func PopulateOptions() FV {

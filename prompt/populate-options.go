@@ -2,7 +2,9 @@ package prompt
 
 import (
 	"errors"
+	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"time"
 
@@ -13,35 +15,24 @@ func PopulateOptions() FV {
 	no := getNo()
 	recipient := getRecipient()
 	entries := getEntries()
-	return FV{
-		Entries:   entries,
-		Recipient: recipient,
-		CreatedAt: time.Now(),
-		NO:        no,
-	}
+	return NewFV(entries, recipient, no)
 }
 
 func getNo() string {
-	prompt := promptui.Prompt{
-		Label: "NO",
-		Validate: func(s string) error {
-			if len(s) < 1 {
-				return errors.New("NO is required")
-			}
-			return nil
-		},
-	}
+	now := time.Now()
 
-	result, err := prompt.Run()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return result
+	return fmt.Sprintf("01/0%d/%d", now.Month(), now.Year())
 }
 
 func getRecipient() Recipient {
 	recipients := PopulateList()
+	switch len(recipients) {
+	case 0:
+		panic("recipient.json is empty")
+	case 1:
+		return recipients[0]
+	}
+
 	prompt := promptui.Select{
 		HideHelp: true,
 		Label:    "Select Recipient",
@@ -63,7 +54,13 @@ func getRecipient() Recipient {
 func getEntries() []Entry {
 	done := false
 	entries := make([]Entry, 0, 16)
-	entry := getEntry()
+	useDefault := os.Getenv("FV_USE_DEFAULT")
+	var entry Entry
+	if useDefault != "" {
+		entry = defaultEntry()
+	} else {
+		entry = getEntry()
+	}
 	entries = append(entries, entry)
 
 	for !done {
@@ -71,8 +68,6 @@ func getEntries() []Entry {
 			e.Dump()
 		}
 
-		// weird implementation of confirm prompts
-		// err means false/empty
 		prompt := promptui.Prompt{
 			Label:     "Add another entry",
 			IsConfirm: true,
@@ -91,8 +86,7 @@ func getEntries() []Entry {
 
 func getEntry() Entry {
 	prompt := promptui.Prompt{
-		Label:   "Description",
-		Default: "Stała współpraca w&nbsp;zakresie usług informatycznych",
+		Label: "Description",
 		Validate: func(s string) error {
 			if len(s) < 1 {
 				return errors.New("description is required")
@@ -171,4 +165,28 @@ func getEntry() Entry {
 		Description: description,
 	}
 
+}
+
+func defaultEntry() Entry {
+	defaultDescription := os.Getenv("FV_DEFAULT_PROMPT")
+	defaultPrice := os.Getenv("FV_DEFAULT_PRICE")
+	defaultUnit := os.Getenv("FV_DEFAULT_UNIT")
+	defaultAmount := os.Getenv("FV_DEFAULT_AMOUNT")
+
+	price, err := strconv.ParseFloat(defaultPrice, 64)
+	if err != nil {
+		panic("FV_DEFAULT_PRICE is invalid float")
+	}
+
+	amount, err := strconv.Atoi(defaultAmount)
+	if err != nil {
+		panic("FV_DEFAULT_AMOUNT is invalid integer")
+	}
+
+	return Entry{
+		Description: defaultDescription,
+		NetHPrice:   price,
+		Unit:        defaultUnit,
+		Amount:      amount,
+	}
 }

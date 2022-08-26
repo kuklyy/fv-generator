@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
@@ -15,6 +17,21 @@ type FV struct {
 	Recipient Recipient
 	CreatedAt time.Time
 	NO        string
+	CSSPath   string
+}
+
+func NewFV(entries []Entry, recipient Recipient, no string) FV {
+	binPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		panic("failed to load binPath")
+	}
+	return FV{
+		Entries:   entries,
+		Recipient: recipient,
+		NO:        no,
+		CreatedAt: time.Now(),
+		CSSPath:   fmt.Sprintf("%s/style.css", binPath),
+	}
 }
 
 func (f FV) TotalNetAmount() float64 {
@@ -79,7 +96,5 @@ func (f FV) GetPayday() string {
 }
 
 func (f FV) GetServiceDate() string {
-	date := f.CreatedAt.AddDate(0, 0, -f.CreatedAt.Day())
-
-	return date.Format("02.01.2006")
+	return f.GetCreateAtDate()
 }

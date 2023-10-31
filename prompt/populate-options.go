@@ -21,7 +21,7 @@ func PopulateOptions() FV {
 func getNo() string {
 	now := time.Now()
 
-	return fmt.Sprintf("01/0%d/%d", now.Month(), now.Year())
+	return fmt.Sprintf("01/%02d/%d", now.Month(), now.Year())
 }
 
 func getRecipient() Recipient {

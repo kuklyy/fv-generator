@@ -2,6 +2,7 @@ package prompt
 
 import (
 	"fmt"
+	fvtime "fv-generator/time"
 	"io"
 	"log"
 	"net/http"
@@ -29,7 +30,7 @@ func NewFV(entries []Entry, recipient Recipient, no string) FV {
 		Entries:   entries,
 		Recipient: recipient,
 		NO:        no,
-		CreatedAt: time.Now(),
+		CreatedAt: fvtime.New(time.Now()),
 		CSSPath:   fmt.Sprintf("%s/style.css", binPath),
 	}
 }

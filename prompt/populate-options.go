@@ -3,6 +3,7 @@ package prompt
 import (
 	"errors"
 	"fmt"
+	fvtime "fv-generator/time"
 	"log"
 	"os"
 	"strconv"
@@ -19,7 +20,7 @@ func PopulateOptions() FV {
 }
 
 func getNo() string {
-	now := time.Now()
+	now := fvtime.New(time.Now())
 
 	return fmt.Sprintf("01/%02d/%d", now.Month(), now.Year())
 }
@@ -52,11 +53,12 @@ func getRecipient() Recipient {
 }
 
 func getEntries() []Entry {
-	done := false
 	entries := make([]Entry, 0, 16)
 	useDefault := os.Getenv("FV_USE_DEFAULT")
+	done := useDefault != ""
+
 	var entry Entry
-	if useDefault != "" {
+	if done {
 		entry = defaultEntry()
 	} else {
 		entry = getEntry()

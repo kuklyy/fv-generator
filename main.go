@@ -5,10 +5,9 @@ import (
 	"context"
 	"fmt"
 	"fv-generator/prompt"
-	"io/ioutil"
+	fvtime "fv-generator/time"
 	"log"
 	"os"
-	"strings"
 	"text/template"
 	"time"
 
@@ -29,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err := ioutil.WriteFile("temp.html", parsedTemplate.Bytes(), 0644); err != nil {
+	if err := os.WriteFile("temp.html", parsedTemplate.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
 	defer func() {
@@ -55,13 +54,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	outputName := strings.Replace(fmt.Sprintf("fv-%s.pdf", fv.NO), "/", "-", -1)
+	outputName := fmt.Sprintf("fv-%s.pdf", fv.CreatedAt.Format(time.DateOnly))
 
-	if err := ioutil.WriteFile("output/"+outputName, parsedTemplate.Bytes(), 0644); err != nil {
+	if err := os.WriteFile("output/"+outputName, parsedTemplate.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("File saved to output/%s at %v\n", outputName, time.Now().String())
+	fmt.Printf("File saved to output/%s at %v\n", outputName, fvtime.New(time.Now()).String())
 }
 
 func grabPdf(url string, res *bytes.Buffer) chromedp.Tasks {

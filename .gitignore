@@ -3,3 +3,5 @@ output/*.pdf
 .DS_STORE
 recipients.json
 fv-generator
+main
+pkl/*.pkl

@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="{{.CSSPath}}">
+</head>
+
+<body class="A4">
+    <section class="sheet padding-10mm" style="display: flex; flex-direction: column">
+        <div class="pre-header">
+            <div class="ph-title">
+                <p>Miejscowość:</p>
+                <p>Data:</p>
+            </div>
+            <div class="ph-content">
+                <p>{{.Seller.City}}</p>
+                <p>{{.GetCreateAtDate}}</p>
+            </div>
+        </div>
+        <div class="header">
+            <p>{{.Fv.HeaderPrefix}}{{.NO}}</p>
+        </div>
+        <div class="contact">
+            <div class="c-column">
+                <p class="c-header">
+                    Sprzedawca:
+                </p>
+                <div class="c-item">
+                    <p>Nazwa firmy:</p>
+                    <p class="c-item-content">{{.Seller.Name}}</p>
+                </div>
+                <div class="c-item">
+                    <p>Adres:</p>
+                    <p class="c-item-content">{{.Seller.Address}}</p>
+                </div>
+                <div class="c-item">
+                    <p>NIP:</p>
+                    <p class="c-item-content">{{.Seller.VatNumber}}</p>
+                </div>
+                <div class="c-item">
+                    <p>Numer konta:</p>
+                    <p class="c-item-content">{{.Seller.BankNumber}}</p>
+                </div>
+            </div>
+            <div class="c-column">
+                <p class="c-header">
+                    Nabywca:
+                </p>
+                <div class="c-item">
+                    <p>Nazwa firmy:</p>
+                    <p class="c-item-content">{{.Recipient.Name}}</p>
+                </div>
+                <div class="c-item">
+                    <p>Adres:</p>
+                    <p class="c-item-content">{{.Recipient.Address}}</p>
+                </div>
+                <div class="c-item">
+                    <p>NIP:</p>
+                    <p class="c-item-content">{{.Recipient.VatNumber}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <div class="t-row">
+                <div class="t-column">Opis</div>
+                <div class="t-column">Jednostka miary</div>
+                <div class="t-column">Ilość</div>
+                <div class="t-column">Cena za jednostkę netto</div>
+                <div class="t-column">Wartość netto</div>
+                <div class="t-column">Stawka VAT</div>
+                <div class="t-column">Kwota VAT</div>
+                <div class="t-column">Wartość brutto</div>
+            </div>
+            {{range $v := .Entries}}
+            <div class="t-row">
+                <div class="t-column">{{$v.Description}}</div>
+                <div class="t-column">{{$v.Unit}}</div>
+                <div class="t-column">{{$v.Amount}}</div>
+                <div class="t-column">{{$v.NetHPriceStr}} zł</div>
+                <div class="t-column">{{$v.NetPriceStr}} zł</div>
+                <div class="t-column">23%</div>
+                <div class="t-column">{{$v.VatPriceStr}} zł</div>
+                <div class="t-column">{{$v.GrossPriceStr}} zł</div>
+            </div>
+            {{end}}
+            <div class="t-row t-sum">
+                <div class="t-column"></div>
+                <div class="t-column"></div>
+                <div class="t-column"></div>
+                <div class="t-column">Razem</div>
+                <div class="t-column">{{.TotalNetAmountStr}} zł</div>
+                <div class="t-column">23%</div>
+                <div class="t-column">{{.TotalVatAmountStr}} zł</div>
+                <div class="t-column">{{.TotalGrossAmountStr}} zł</div>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="c-item">
+                <p>Razem:</p>
+                <p class="c-item-content">{{.TotalGrossAmountStr}} zł</p>
+            </div>
+            <div class="c-item">
+                <p>Słownie:</p>
+                <p class="c-item-content">{{.GetAmountStr}}</p>
+            </div>
+            <div class="c-item">
+                <p>Sposób zapłaty:</p>
+                <p class="c-item-content">Przelew</p>
+            </div>
+            <div class="c-item">
+                <p>Termin płatności:</p>
+                <p class="c-item-content">{{.GetPayday}}</p>
+            </div>
+            <div class="c-item">
+                <p>Data wykonania usługi:</p>
+                <p class="c-item-content">{{.GetServiceDate}}</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -8,6 +8,7 @@ require (
 	github.com/chromedp/chromedp v0.9.5
 	github.com/manifoldco/promptui v0.9.0
 	github.com/stretchr/testify v1.9.0
+	github.com/go-chi/chi/v5 v5.0.12
 )
 
 require (

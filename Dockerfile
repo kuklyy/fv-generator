@@ -16,5 +16,6 @@ FROM alpine:3.19.1
 
 COPY --from=builder /fv-server /bin
 COPY --from=builder /src/templates/static/web.html /templates/static/web.html
+COPY --from=builder /src/templates/static/favicon.ico /templates/static/favicon.ico
 
 CMD ["sh", "-c", "fv-server"]

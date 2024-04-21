@@ -13,7 +13,7 @@ import (
 
 func main() {
 	slog.Info("starting server")
-	webTemplateFile, err := os.OpenFile("templates/static/web.html", os.O_RDONLY, 0644)
+	webTemplateFile, err := os.OpenFile("/templates/static/web.html", os.O_RDONLY, 0644)
 	if err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)

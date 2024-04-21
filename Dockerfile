@@ -15,5 +15,6 @@ RUN go build -o /fv-server cmd/server/main.go
 FROM alpine:3.19.1
 
 COPY --from=builder /fv-server /bin
+COPY --from=builder /src/templates/static/web.html /templates/static/web.html
 
 CMD ["sh", "-c", "fv-server"]

@@ -1,12 +1,14 @@
 package main
 
 import (
+	"log/slog"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 )
 
 func main() {
+	slog.Info("starting server")
 	r := chi.NewRouter()
 
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {

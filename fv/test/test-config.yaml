@@ -1,0 +1,28 @@
+recipient:
+  name: "Recipient Name"
+  address: "Recipient Address"
+  vatNumber: "123 456 78 90"
+
+seller:
+  city: "Seller City"
+  name: "Seller Name"
+  address: "Seller Address"
+  vatNumber: "098 765 43 21"
+  bankNumber: "12 1234 1234 0000 1234 1234 1234"
+
+fv:
+  headerPrefix: "Invoice Prefix"
+  entries:
+    - name: "Entry [0] name"
+      price: 1000.12
+      unit: "szt"
+      amount: 1
+      vat: 23
+    - name: "Entry&nbsp;[1]&nbsp;name"
+      price: 2000.22
+      unit: "szt"
+      amount: 2
+      vat: 8
+  no: "0000/1111/2222"
+
+now: "2012-05-31"

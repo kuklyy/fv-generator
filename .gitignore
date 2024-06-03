@@ -1,6 +1,7 @@
 .idea
 output/*.pdf
 .DS_STORE
-recipients.json
-pkl/*.pkl
+config.yaml
+
 bin/*
+!bin/.gitkeep

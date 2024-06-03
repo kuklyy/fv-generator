@@ -2,7 +2,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="{{.CSSPath}}">
+    <link rel="stylesheet" href="fv/templates/classic.css">
 </head>
 
 <body class="A4">
@@ -13,33 +13,33 @@
                 <p>Data:</p>
             </div>
             <div class="ph-content">
-                <p>{{.Seller.City}}</p>
-                <p>{{.GetCreateAtDate}}</p>
+                <p>Seller City</p>
+                <p>2012-05-31</p>
             </div>
         </div>
-        <div class="header">
-            <p>{{.Fv.HeaderPrefix}}{{.NO}}</p>
+         <div class="header">
+            <p>Invoice Prefix 0000/1111/2222</p>
         </div>
-        <div class="contact">
+       <div class="contact">
             <div class="c-column">
                 <p class="c-header">
                     Sprzedawca:
                 </p>
                 <div class="c-item">
                     <p>Nazwa firmy:</p>
-                    <p class="c-item-content">{{.Seller.Name}}</p>
+                    <p class="c-item-content">Seller Name</p>
                 </div>
                 <div class="c-item">
                     <p>Adres:</p>
-                    <p class="c-item-content">{{.Seller.Address}}</p>
+                    <p class="c-item-content">Seller Address</p>
                 </div>
                 <div class="c-item">
                     <p>NIP:</p>
-                    <p class="c-item-content">{{.Seller.VatNumber}}</p>
+                    <p class="c-item-content">098 765 43 21</p>
                 </div>
                 <div class="c-item">
                     <p>Numer konta:</p>
-                    <p class="c-item-content">{{.Seller.BankNumber}}</p>
+                    <p class="c-item-content">12 1234 1234 0000 1234 1234 1234</p>
                 </div>
             </div>
             <div class="c-column">
@@ -48,15 +48,15 @@
                 </p>
                 <div class="c-item">
                     <p>Nazwa firmy:</p>
-                    <p class="c-item-content">{{.Recipient.Name}}</p>
+                    <p class="c-item-content">Recipient Name</p>
                 </div>
                 <div class="c-item">
                     <p>Adres:</p>
-                    <p class="c-item-content">{{.Recipient.Address}}</p>
+                    <p class="c-item-content">Recipient Address</p>
                 </div>
                 <div class="c-item">
                     <p>NIP:</p>
-                    <p class="c-item-content">{{.Recipient.VatNumber}}</p>
+                    <p class="c-item-content">123 456 78 90</p>
                 </div>
             </div>
         </div>
@@ -67,41 +67,52 @@
                 <div class="t-column">Ilość</div>
                 <div class="t-column">Cena za jednostkę netto</div>
                 <div class="t-column">Wartość netto</div>
-                <div class="t-column">Stawka VAT</div>
                 <div class="t-column">Kwota VAT</div>
                 <div class="t-column">Wartość brutto</div>
+                <div class="t-column">Stawka VAT</div>
             </div>
-            {{range $v := .Entries}}
+            
             <div class="t-row">
-                <div class="t-column">{{$v.Description}}</div>
-                <div class="t-column">{{$v.Unit}}</div>
-                <div class="t-column">{{$v.Amount}}</div>
-                <div class="t-column">{{$v.NetHPriceStr}} zł</div>
-                <div class="t-column">{{$v.NetPriceStr}} zł</div>
+                <div class="t-column">Entry [0] name</div>
+                <div class="t-column">szt</div>
+                <div class="t-column">1</div>
+                <div class="t-column">1000.12 zł</div>
+                <div class="t-column">1000.12 zł</div>
+                <div class="t-column">230.03 zł</div>
+                <div class="t-column">1230.15 zł</div>
                 <div class="t-column">23%</div>
-                <div class="t-column">{{$v.VatPriceStr}} zł</div>
-                <div class="t-column">{{$v.GrossPriceStr}} zł</div>
             </div>
-            {{end}}
+            
+            <div class="t-row">
+                <div class="t-column">Entry&nbsp;[1]&nbsp;name</div>
+                <div class="t-column">szt</div>
+                <div class="t-column">2</div>
+                <div class="t-column">2000.22 zł</div>
+                <div class="t-column">4000.44 zł</div>
+                <div class="t-column">320.04 zł</div>
+                <div class="t-column">4320.48 zł</div>
+                <div class="t-column">8%</div>
+            </div>
+            
             <div class="t-row t-sum">
                 <div class="t-column"></div>
                 <div class="t-column"></div>
                 <div class="t-column"></div>
                 <div class="t-column">Razem</div>
-                <div class="t-column">{{.TotalNetAmountStr}} zł</div>
-                <div class="t-column">23%</div>
-                <div class="t-column">{{.TotalVatAmountStr}} zł</div>
-                <div class="t-column">{{.TotalGrossAmountStr}} zł</div>
+                <div class="t-column">5000.56 zł</div>
+                <div class="t-column">550.06 zł</div>
+                <div class="t-column">5550.62 zł</div>
+                <div class="t-column"></div>
             </div>
         </div>
         <div class="summary">
             <div class="c-item">
                 <p>Razem:</p>
-                <p class="c-item-content">{{.TotalGrossAmountStr}} zł</p>
+                <p class="c-item-content">5550.62 zł</p>
             </div>
             <div class="c-item">
                 <p>Słownie:</p>
-                <p class="c-item-content">{{.GetAmountStr}}</p>
+                <p class="c-item-content">pięć tysięcy pięćset pięćdziesiąt złotych  62/100</p>
             </div>
             <div class="c-item">
                 <p>Sposób zapłaty:</p>
@@ -109,13 +120,13 @@
             </div>
             <div class="c-item">
                 <p>Termin płatności:</p>
-                <p class="c-item-content">{{.GetPayday}}</p>
+                <p class="c-item-content">2012-06-14</p>
             </div>
             <div class="c-item">
                 <p>Data wykonania usługi:</p>
-                <p class="c-item-content">{{.GetServiceDate}}</p>
+                <p class="c-item-content">2012-05-31</p>
             </div>
-        </div>
+        </div> 
     </section>
 
 </body>

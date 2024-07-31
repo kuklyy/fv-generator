@@ -87,7 +87,7 @@ func NewConfig() (Config, error) {
 		return Config{}, err
 	}
 	if t.FV.NO == "" {
-		t.FV.NO = fmt.Sprintf("FV/%s", t.Now.Time().Format("01/2006"))
+		t.FV.NO = fmt.Sprintf("FV/01/%s", t.Now.Time().Format("01/2006"))
 	}
 
 	return t, nil

@@ -86,6 +86,9 @@ func NewConfig() (Config, error) {
 	if err != nil {
 		return Config{}, err
 	}
+	if t.Now.Time().IsZero() {
+		t.Now = FVTime(time.Now())
+	}
 	if t.FV.NO == "" {
 		t.FV.NO = fmt.Sprintf("FV/01/%s", t.Now.Time().Format("01/2006"))
 	}
